@@ -12,7 +12,7 @@ namespace d7p4n4Namespace.Context.Class
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=Ac4ySD3;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=.\SQLEXPRESS;Database=Ac4ySD3;Trusted_Connection=False;User Id=manager;Password=Manager99;");
         }
 
         public DbSet<Ac4ySDSequence> Ac4ySDSequences { get; set; }
