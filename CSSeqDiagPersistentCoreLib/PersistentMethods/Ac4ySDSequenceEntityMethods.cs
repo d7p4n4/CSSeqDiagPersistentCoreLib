@@ -15,19 +15,26 @@ namespace d7p4n4Namespace.EFMethods.Class
     public class Ac4ySDSequenceEntityMethods : Ac4ySDSequenceAlgebra
     {
 		public string baseName { get; set; }
+        public string userName { get; set; }
+        public string password { get; set; }
 
         public Ac4ySDSequenceEntityMethods() { }
 
-        public Ac4ySDSequenceEntityMethods(string newBaseName)
+        public Ac4ySDSequenceEntityMethods(string newBaseName, string uName, string pwd)
         {
             baseName = newBaseName;
+            userName = uName;
+            password = pwd;
+
+            AllContext context = new AllContext(baseName, userName, password);
+            context.Database.EnsureCreated();
         }
 	
         public Ac4ySDSequence findFirstById(Int32 id)
         {
             Ac4ySDSequence a = null;
 
-            using (var ctx = new AllContext())
+            using (var ctx = new AllContext(baseName, userName, password))
             {
                 var query = ctx.Ac4ySDSequences
                                 .Where(ss => ss.id == id)
@@ -42,7 +49,7 @@ namespace d7p4n4Namespace.EFMethods.Class
         {
 			Ac4ySDSequence a = null;
 
-            using (var ctx = new AllContext())
+            using (var ctx = new AllContext(baseName, userName, password))
             {
                 var query = ctx.Ac4ySDSequences
                                 .Where(ss => ss.id == id)
@@ -66,7 +73,7 @@ namespace d7p4n4Namespace.EFMethods.Class
 		
 	public void addNew(Ac4ySDSequence _Ac4ySDSequence)
 	{
-		using (var ctx = new AllContext())
+		using (var ctx = new AllContext(baseName, userName, password))
             {
                 ctx.Ac4ySDSequences.Add(_Ac4ySDSequence);
 
@@ -88,7 +95,7 @@ namespace d7p4n4Namespace.EFMethods.Class
 
             _Ac4ySDSequence.serialization = xml;
 
-			using (var ctx = new AllContext())
+			using (var ctx = new AllContext(baseName, userName, password))
             {
                 ctx.Ac4ySDSequences.Add(_Ac4ySDSequence);
 

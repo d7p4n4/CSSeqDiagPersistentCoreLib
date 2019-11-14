@@ -13,14 +13,18 @@ namespace d7p4n4Namespace.PersistentService.Class
     {
 	
 		public string baseName { get; set; }
+        public string userName { get; set; }
+        public string password { get; set; }
 		private Ac4ySDSequenceEntityMethods _Ac4ySDSequenceEntityMethods { get; set; }
 		
 		public Ac4ySDSequencePersistentService() { }
 
-        public Ac4ySDSequencePersistentService(string newBaseName)
+        public Ac4ySDSequencePersistentService(string newBaseName, string uName, string pwd)
         {
             baseName = newBaseName;
-            _Ac4ySDSequenceEntityMethods = new Ac4ySDSequenceEntityMethods(baseName);
+            userName = uName;
+            password = pwd;
+            _Ac4ySDSequenceEntityMethods = new Ac4ySDSequenceEntityMethods(baseName, userName, password);
         }
 
         public GetObjectResponse GetFirstById(int id)
